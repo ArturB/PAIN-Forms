@@ -14,22 +14,22 @@ namespace PAIN_Forms
     {
         int imageIndex;
 
-        public String imageDescription()
+        public CarType choosedType()
         {
             if (imageIndex == 0)
             {
-                return "Osobowy";
+                return CarType.Osobowy;
             }
             else if (imageIndex == 1)
             {
-                return "Ciężarowy";
+                return CarType.Ciezarowy;
 
             }
             else if (imageIndex == 2)
             {
-                return "Jednoślad";
+                return CarType.Jednosladowy;
             }
-            else return "Unknown";
+            else throw new UnknownCarType();
         }
 
         public CarTypeChooser()
@@ -43,7 +43,9 @@ namespace PAIN_Forms
         {
             imageIndex = (imageIndex + 1) % 3;
             pictureBox1.Image = imageList1.Images[imageIndex];
-            label1.Text = imageDescription();
+            label1.Text = choosedType().ToString();
         }
     }
+
+    class UnknownCarType : Exception { }
 }

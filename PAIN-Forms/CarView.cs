@@ -12,9 +12,12 @@ namespace PAIN_Forms
 {
     public partial class CarView : Form
     {
-        public CarView()
+        ParentView parent;
+
+        public CarView(ParentView parent_) 
         {
             InitializeComponent();
+            parent = parent_;
         }
 
         public int CarImageIndex(Car c)
@@ -35,13 +38,18 @@ namespace PAIN_Forms
 
         public void InitData()
         {
+            listView1.SmallImageList = CarTypesImages;
+            listView1.StateImageList = CarTypesImages;
+            listView1.LargeImageList = CarTypesImages;
             foreach (Car c in ((ParentView)this.ParentForm).cars)
             {
-                listView1.SmallImageList = CarTypesImages;
-                listView1.StateImageList = CarTypesImages;
-                listView1.LargeImageList = CarTypesImages;
                 listView1.Items.Add(c.ToString(), CarImageIndex(c));
             }
+        }
+
+        public void AddCar(Car c)
+        {
+            listView1.Items.Add(c.ToString(), CarImageIndex(c));
         }
 
         private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
@@ -64,7 +72,7 @@ namespace PAIN_Forms
 
         private void ciezarowyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CarEdit editDialog = new CarEdit();
+            CarAdd editDialog = new CarAdd(parent);
             editDialog.ShowDialog();
         }
 
@@ -80,15 +88,24 @@ namespace PAIN_Forms
 
         private void osobowyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CarEdit editDialog = new CarEdit();
-            editDialog.us
+            CarAdd editDialog = new CarAdd(parent);
             editDialog.ShowDialog();
         }
 
         private void jednośladToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CarEdit editDialog = new CarEdit();
+            CarAdd editDialog = new CarAdd(parent);
             editDialog.ShowDialog();
+        }
+
+        private void CarView_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listView1_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+
         }
     }
 }

@@ -23,6 +23,16 @@ namespace PAIN_Forms
             cars.Add(new Car(3, "Romet", 50, 2010, CarType.Jednosladowy));
         }
 
+        public void AddCar(Car c)
+        {
+            cars.Add(c);
+            foreach(CarView cv in MdiChildren)
+            {
+                cv.AddCar(c);
+            }
+
+        }
+
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -30,7 +40,7 @@ namespace PAIN_Forms
 
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CarView f = new CarView();
+            CarView f = new CarView(this);
             f.MdiParent = this;
             f.InitData();
             f.Show();

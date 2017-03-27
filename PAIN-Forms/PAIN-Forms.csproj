@@ -47,11 +47,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Car.cs" />
-    <Compile Include="CarEdit.cs">
+    <Compile Include="CarAdd.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CarEdit.Designer.cs">
-      <DependentUpon>CarEdit.cs</DependentUpon>
+    <Compile Include="CarAdd.Designer.cs">
+      <DependentUpon>CarAdd.cs</DependentUpon>
     </Compile>
     <Compile Include="CarTypeChooser.cs">
       <SubType>UserControl</SubType>
@@ -73,8 +73,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="CarEdit.resx">
-      <DependentUpon>CarEdit.cs</DependentUpon>
+    <EmbeddedResource Include="CarAdd.resx">
+      <DependentUpon>CarAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CarTypeChooser.resx">
       <DependentUpon>CarTypeChooser.cs</DependentUpon>
