@@ -33,6 +33,32 @@ namespace PAIN_Forms
 
         }
 
+        public List<Car> before2000()
+        {
+            List<Car> result = new List<Car>();
+            foreach(Car c in cars)
+            {
+                if(c.rok_prod < 2000)
+                {
+                    result.Add(c);
+                }
+            }
+            return result;
+        }
+
+        public List<Car> after2000()
+        {
+            List<Car> result = new List<Car>();
+            foreach (Car c in cars)
+            {
+                if (c.rok_prod >= 2000)
+                {
+                    result.Add(c);
+                }
+            }
+            return result;
+        }
+
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -42,7 +68,7 @@ namespace PAIN_Forms
         {
             CarView f = new CarView(this);
             f.MdiParent = this;
-            f.InitData();
+            f.LoadData(cars);
             f.Show();
         }
 

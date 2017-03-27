@@ -36,12 +36,13 @@ namespace PAIN_Forms
             }
         }
 
-        public void InitData()
+        public void LoadData(List<Car> lc)
         {
+            listView1.Items.Clear();
             listView1.SmallImageList = CarTypesImages;
             listView1.StateImageList = CarTypesImages;
             listView1.LargeImageList = CarTypesImages;
-            foreach (Car c in ((ParentView)this.ParentForm).cars)
+            foreach (Car c in lc)
             {
                 listView1.Items.Add(c.ToString(), CarImageIndex(c));
             }
@@ -115,7 +116,20 @@ namespace PAIN_Forms
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if(comboBox1.SelectedIndex == 0)
+            {
+                LoadData(parent.cars);
 
+            }
+            else if(comboBox1.SelectedIndex == 1)
+            {
+                LoadData(parent.before2000());
+            }
+            else if(comboBox1.SelectedIndex == 2)
+            {
+                LoadData(parent.after2000());
+            }
+            else { }
         }
     }
 }
