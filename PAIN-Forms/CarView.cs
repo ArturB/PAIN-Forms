@@ -44,7 +44,7 @@ namespace PAIN_Forms
             listView1.LargeImageList = CarTypesImages;
             foreach (Car c in lc)
             {
-                listView1.Items.Add(c.ToString(), CarImageIndex(c));
+                listView1.Items.Add(c.id.ToString(), c.ToString(), CarImageIndex(c));
             }
         }
 
@@ -73,8 +73,8 @@ namespace PAIN_Forms
 
         private void ciezarowyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CarAdd editDialog = new CarAdd(parent);
-            editDialog.ShowDialog();
+            CarAdd addDialog = new CarAdd(parent, 1);
+            addDialog.ShowDialog();
         }
 
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -89,13 +89,13 @@ namespace PAIN_Forms
 
         private void osobowyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CarAdd editDialog = new CarAdd(parent);
+            CarAdd editDialog = new CarAdd(parent, 0);
             editDialog.ShowDialog();
         }
 
         private void jednośladToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CarAdd editDialog = new CarAdd(parent);
+            CarAdd editDialog = new CarAdd(parent, 2);
             editDialog.ShowDialog();
         }
 
@@ -130,6 +130,23 @@ namespace PAIN_Forms
                 LoadData(parent.after2000());
             }
             else { }
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listView1_DoubleClick(object sender, EventArgs e)
+        {
+            CarEdit editDialog = new CarEdit(
+                parent, 
+                parent.getCarByIndex(
+                    int.Parse(listView1.SelectedItems[0].Name)
+                )
+            );
+            editDialog.ShowDialog();
+
         }
     }
 }
