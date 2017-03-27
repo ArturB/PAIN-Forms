@@ -11,5 +11,6 @@ namespace PAIN_Forms
         void AddCar(Car c);
         void EditCar(Car c);
         void DeleteCar(Car c);
+        void foo();
     }
 }
