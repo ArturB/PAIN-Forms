@@ -13,6 +13,19 @@ namespace PAIN_Forms
     public partial class ParentView : Form
     {
         public List<Car> cars { get; set; }
+        public int carsCount { get; set; }
+
+        public Car getCarByIndex(int index)
+        {
+            foreach(Car c in cars)
+            {
+                if (c.id == index)
+                {
+                    return c;
+                }
+            }
+            throw new NoSuchIndex();
+        }
 
         public ParentView()
         {
@@ -21,10 +34,13 @@ namespace PAIN_Forms
             cars.Add(new PAIN_Forms.Car(1, "Chevrolet", 180, 2005, CarType.Osobowy));
             cars.Add(new Car(2, "Scania", 140, 1999, CarType.Ciezarowy));
             cars.Add(new Car(3, "Romet", 50, 2010, CarType.Jednosladowy));
+            carsCount = 3;
         }
 
         public void AddCar(Car c)
         {
+            carsCount++;
+            c.id = carsCount;
             cars.Add(c);
             foreach(CarView cv in MdiChildren)
             {
@@ -77,4 +93,6 @@ namespace PAIN_Forms
             Application.Exit();
         }
     }
+
+    class NoSuchIndex : Exception { }
 }

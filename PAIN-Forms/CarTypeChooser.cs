@@ -12,7 +12,21 @@ namespace PAIN_Forms
 {
     public partial class CarTypeChooser : UserControl
     {
-        int imageIndex;
+        int imageIndex_;
+        public int imageIndex
+        {
+            get
+            {
+                return imageIndex_;
+            }
+
+            set
+            {
+                imageIndex_ = value;
+                pictureBox1.Image = imageList1.Images[imageIndex];
+                label1.Text = choosedType().ToString();
+            }
+        }
 
         public CarType choosedType()
         {

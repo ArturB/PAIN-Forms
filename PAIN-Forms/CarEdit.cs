@@ -10,12 +10,13 @@ using System.Windows.Forms;
 
 namespace PAIN_Forms
 {
-    public partial class CarAdd : Form
+    public partial class CarEdit : Form
     {
         CarTypeChooser chooser;
         ParentView parent;
+        Car editedCar;
 
-        public CarAdd(ParentView parent_, int initImage_)
+        public CarEdit(ParentView parent_, Car editedCar_)
         {
             InitializeComponent();
 
@@ -24,7 +25,11 @@ namespace PAIN_Forms
             tableLayoutPanel1.SetColumnSpan(chooser, 2);
 
             parent = parent_;
-            chooser.imageIndex = initImage_;
+            editedCar = editedCar_;
+            markaTextBox.Text = editedCar.marka;
+            rokTextBox.Text = editedCar.rok_prod.ToString();
+            PredkoscTextBox.Text = editedCar.maks_v.ToString();
+            chooser.imageIndex = (int)editedCar.rodzaj;
         }
 
         private void CarEdit_FormClosing(object sender, FormClosingEventArgs e)
