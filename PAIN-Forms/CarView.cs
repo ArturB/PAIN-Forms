@@ -45,11 +45,6 @@ namespace PAIN_Forms
             return !before2000(c);
         }
 
-        bool identity(Car c)
-        {
-            return true;
-        }
-
         /*
          * Public
          */
@@ -58,7 +53,7 @@ namespace PAIN_Forms
         {
             InitializeComponent();
             parent = parent_;
-            currentFilter = identity;
+            currentFilter = IdentityFilter.get();
         }
 
         /*
@@ -67,20 +62,30 @@ namespace PAIN_Forms
 
         public void ReloadData(List<Car> lc)
         {
+            int count = 0;
             listView1.Items.Clear();
             listView1.SmallImageList = CarTypesImages;
             listView1.StateImageList = CarTypesImages;
             listView1.LargeImageList = CarTypesImages;
             foreach (Car c in lc)
             {
-                listView1.Items.Add(c.id.ToString(), c.ToString(), CarImageIndex(c));
+                if(currentFilter(c))
+                {
+                    listView1.Items.Add(c.id.ToString(), c.ToString(), CarImageIndex(c));
+                    count++;
+                }
+                
             }
-            toolStripStatusLabel1.Text = lc.Count.ToString();
+            toolStripStatusLabel1.Text = count.ToString();
         }
 
         public void AddCar(Car c)
         {
             listView1.Items.Add(c.id.ToString(), c.ToString(), CarImageIndex(c));
+            if(currentFilter != IdentityFilter.get())
+            {
+                ReloadData(parent.cars);
+            }
         }
 
         public void EditCar(Car c)
@@ -93,6 +98,10 @@ namespace PAIN_Forms
                     i.ImageIndex = CarImageIndex(c);
                 }
             }
+            if (currentFilter != IdentityFilter.get())
+            {
+                ReloadData(parent.cars);
+            }
         }
 
         public void DeleteCar(Car c)
@@ -104,19 +113,10 @@ namespace PAIN_Forms
                     listView1.Items.Remove(i);
                 }
             }
-        }
-
-        public void Filter()
-        {
-            List<Car> filtered = new List<Car>();
-            foreach(Car c in parent.cars)
+            if (currentFilter != IdentityFilter.get())
             {
-                if (currentFilter(c))
-                {
-                    filtered.Add(c);
-                }
+                ReloadData(parent.cars);
             }
-            ReloadData(filtered);
         }
 
         /*
@@ -188,19 +188,19 @@ namespace PAIN_Forms
         {
             if(comboBox1.SelectedIndex == 0)
             {
-                currentFilter = identity;
-                Filter();
+                currentFilter = IdentityFilter.get();
+                ReloadData(parent.cars);
 
             }
             else if(comboBox1.SelectedIndex == 1)
             {
                 currentFilter = before2000;
-                Filter();
+                ReloadData(parent.cars);
             }
             else if(comboBox1.SelectedIndex == 2)
             {
                 currentFilter = after2000;
-                Filter();
+                ReloadData(parent.cars);
             }
             else { }
         }

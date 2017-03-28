@@ -8,6 +8,14 @@ namespace PAIN_Forms
 {
     public delegate bool CarsFilter(Car c);
 
+    public class IdentityFilter
+    {
+        public static CarsFilter get()
+        {
+            return s => true;
+        }
+    }
+
     public interface ICarViewer
     {
         void AddCar(Car c);
@@ -15,6 +23,5 @@ namespace PAIN_Forms
         void DeleteCar(Car c);
         void ReloadData(List<Car> c);
         CarsFilter currentFilter { get; set; }
-        void Filter();
     }
 }
