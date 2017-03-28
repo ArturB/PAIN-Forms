@@ -56,6 +56,20 @@ namespace PAIN_Forms
             currentFilter = IdentityFilter.get();
         }
 
+        public String ToolStripText
+        {
+            get
+            {
+                return toolStripStatusLabel1.Text;
+            }
+
+            set
+            {
+                toolStripStatusLabel1.Text = value;
+            }
+        }
+
+
         /*
          * ICarViewer implementation
          */
@@ -235,6 +249,11 @@ namespace PAIN_Forms
         private void toolStripStatusLabel2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void toolStripStatusLabel1_TextChanged(object sender, EventArgs e)
+        {
+            parent.ToolStripText = ToolStripText;
         }
     }
 }

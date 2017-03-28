@@ -249,12 +249,14 @@
             this.statusStrip1.Size = new System.Drawing.Size(601, 25);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "0";
+            this.statusStrip1.Visible = false;
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(17, 20);
             this.toolStripStatusLabel1.Text = "0";
+            this.toolStripStatusLabel1.TextChanged += new System.EventHandler(this.toolStripStatusLabel1_TextChanged);
             // 
             // toolStripStatusLabel2
             // 

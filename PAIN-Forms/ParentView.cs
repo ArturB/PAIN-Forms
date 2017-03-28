@@ -27,6 +27,19 @@ namespace PAIN_Forms
             throw new NoSuchIndex();
         }
 
+        public String ToolStripText
+        {
+            get
+            {
+                return toolStripStatusLabel1.Text;
+            }
+            set
+            {
+                toolStripStatusLabel1.Text = value;
+            }
+        }
+
+
         public ParentView()
         {
             InitializeComponent();
@@ -94,6 +107,8 @@ namespace PAIN_Forms
             }
         }
 
+        
+
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -110,6 +125,11 @@ namespace PAIN_Forms
         private void ParentView_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void ParentView_MdiChildActivate(object sender, EventArgs e)
+        {
+            ToolStripText = ((CarView)ActiveMdiChild).ToolStripText;
         }
     }
     class NoSuchIndex : Exception { }

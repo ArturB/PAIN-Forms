@@ -121,6 +121,7 @@
             this.Name = "ParentView";
             this.Text = "PAIN Forms";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ParentView_FormClosing);
+            this.MdiChildActivate += new System.EventHandler(this.ParentView_MdiChildActivate);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
