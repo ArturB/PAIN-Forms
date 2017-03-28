@@ -86,6 +86,11 @@ namespace PAIN_Forms
             {
                 ReloadData(parent.cars);
             }
+            else
+            {
+                int count = int.Parse(toolStripStatusLabel1.Text);
+                toolStripStatusLabel1.Text = (++count).ToString();
+            }
         }
 
         public void EditCar(Car c)
@@ -116,6 +121,11 @@ namespace PAIN_Forms
             if (currentFilter != IdentityFilter.get())
             {
                 ReloadData(parent.cars);
+            }
+            else
+            {
+                int count = int.Parse(toolStripStatusLabel1.Text);
+                toolStripStatusLabel1.Text = count--.ToString();
             }
         }
 
