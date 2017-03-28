@@ -133,7 +133,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(189, 31);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Filter";
+            this.label1.Text = "Filtr:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // comboBox1
@@ -173,8 +173,8 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.closeToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
-            this.fileToolStripMenuItem.Text = "View";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
+            this.fileToolStripMenuItem.Text = "Widok";
             this.fileToolStripMenuItem.Click += new System.EventHandler(this.fileToolStripMenuItem_Click);
             // 
             // closeToolStripMenuItem
@@ -191,8 +191,8 @@
             this.editToolStripMenuItem,
             this.deleteToolStripMenuItem});
             this.dataToolStripMenuItem.Name = "dataToolStripMenuItem";
-            this.dataToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
-            this.dataToolStripMenuItem.Text = "Data";
+            this.dataToolStripMenuItem.Size = new System.Drawing.Size(56, 24);
+            this.dataToolStripMenuItem.Text = "Dane";
             // 
             // addToolStripMenuItem
             // 
