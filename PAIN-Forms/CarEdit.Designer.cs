@@ -36,9 +36,9 @@
             this.markaTextBox = new System.Windows.Forms.TextBox();
             this.rokTextBox = new System.Windows.Forms.TextBox();
             this.PredkoscTextBox = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.Zapisz = new System.Windows.Forms.Button();
             this.Usuń = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.idTextBox = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,9 +55,9 @@
             this.tableLayoutPanel1.Controls.Add(this.markaTextBox, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.rokTextBox, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.PredkoscTextBox, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.button1, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.Zapisz, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.Usuń, 2, 5);
-            this.tableLayoutPanel1.Controls.Add(this.textBox1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.idTextBox, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 20);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -131,16 +131,16 @@
             this.PredkoscTextBox.Size = new System.Drawing.Size(232, 22);
             this.PredkoscTextBox.TabIndex = 6;
             // 
-            // button1
+            // Zapisz
             // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.Location = new System.Drawing.Point(122, 330);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(113, 46);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Zapisz";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.Zapisz.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Zapisz.Location = new System.Drawing.Point(122, 330);
+            this.Zapisz.Name = "Zapisz";
+            this.Zapisz.Size = new System.Drawing.Size(113, 46);
+            this.Zapisz.TabIndex = 7;
+            this.Zapisz.Text = "Zapisz";
+            this.Zapisz.UseVisualStyleBackColor = true;
+            this.Zapisz.Click += new System.EventHandler(this.Zapisz_Click);
             // 
             // Usuń
             // 
@@ -151,16 +151,17 @@
             this.Usuń.TabIndex = 8;
             this.Usuń.Text = "Usuń";
             this.Usuń.UseVisualStyleBackColor = true;
+            this.Usuń.Click += new System.EventHandler(this.Usuń_Click);
             // 
-            // textBox1
+            // idTextBox
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.textBox1, 2);
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(122, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(232, 22);
-            this.textBox1.TabIndex = 9;
-            this.textBox1.Visible = false;
+            this.tableLayoutPanel1.SetColumnSpan(this.idTextBox, 2);
+            this.idTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.idTextBox.Location = new System.Drawing.Point(122, 3);
+            this.idTextBox.Name = "idTextBox";
+            this.idTextBox.Size = new System.Drawing.Size(232, 22);
+            this.idTextBox.TabIndex = 9;
+            this.idTextBox.Visible = false;
             // 
             // CarEdit
             // 
@@ -189,8 +190,8 @@
         private System.Windows.Forms.TextBox markaTextBox;
         private System.Windows.Forms.TextBox rokTextBox;
         private System.Windows.Forms.TextBox PredkoscTextBox;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button Zapisz;
         private System.Windows.Forms.Button Usuń;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox idTextBox;
     }
 }

@@ -13,7 +13,7 @@ namespace PAIN_Forms
     public partial class ParentView : Form
     {
         public List<Car> cars { get; set; }
-        public int carsCount { get; set; }
+        int carsCount { get; set; }
 
         public Car getCarByIndex(int index)
         {
@@ -49,30 +49,49 @@ namespace PAIN_Forms
 
         }
 
-        public List<Car> before2000()
+        public void EditCar(Car c)
         {
-            List<Car> result = new List<Car>();
-            foreach(Car c in cars)
+            foreach(Car uc in cars)
             {
-                if(c.rok_prod < 2000)
+                if(uc.id == c.id)
                 {
-                    result.Add(c);
+                    uc.marka = c.marka;
+                    uc.rodzaj = c.rodzaj;
+                    uc.rok_prod = c.rok_prod;
+                    uc.maks_v = c.maks_v;
+                    break;
                 }
             }
-            return result;
+            foreach (CarView cv in MdiChildren)
+            {
+                cv.EditCar(c);
+            }
         }
 
-        public List<Car> after2000()
+        public void DeleteCar(Car c)
         {
-            List<Car> result = new List<Car>();
-            foreach (Car c in cars)
+            foreach(Car uc in cars)
             {
-                if (c.rok_prod >= 2000)
+                if(uc.id == c.id)
                 {
-                    result.Add(c);
+                    cars.Remove(uc);
+                    break;
                 }
             }
-            return result;
+            
+            foreach(CarView cv in MdiChildren)
+            {
+                cv.DeleteCar(c);
+            }
+        }
+
+        public void ReloadData(List<Car> c)
+        {
+            cars = c;
+            foreach(CarView cv in MdiChildren)
+            {
+                cv.ReloadData(c);
+            }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -84,7 +103,7 @@ namespace PAIN_Forms
         {
             CarView f = new CarView(this);
             f.MdiParent = this;
-            f.LoadData(cars);
+            f.ReloadData(cars);
             f.Show();
         }
 
@@ -93,6 +112,5 @@ namespace PAIN_Forms
             Application.Exit();
         }
     }
-
     class NoSuchIndex : Exception { }
 }

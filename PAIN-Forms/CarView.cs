@@ -10,17 +10,16 @@ using System.Windows.Forms;
 
 namespace PAIN_Forms
 {
-    public partial class CarView : Form
+    public partial class CarView : Form, ICarViewer
     {
+        /*
+         * Private fields and methods
+         */
+
         ParentView parent;
+        public CarsFilter currentFilter { get; set; }
 
-        public CarView(ParentView parent_) 
-        {
-            InitializeComponent();
-            parent = parent_;
-        }
-
-        public int CarImageIndex(Car c)
+        int CarImageIndex(Car c)
         {
             if(c.rodzaj == CarType.Osobowy)
             {
@@ -36,7 +35,37 @@ namespace PAIN_Forms
             }
         }
 
-        public void LoadData(List<Car> lc)
+        bool before2000(Car c)
+        {
+            return c.rok_prod < 2000;
+        }
+
+        bool after2000(Car c)
+        {
+            return !before2000(c);
+        }
+
+        bool identity(Car c)
+        {
+            return true;
+        }
+
+        /*
+         * Public
+         */
+
+        public CarView(ParentView parent_)
+        {
+            InitializeComponent();
+            parent = parent_;
+            currentFilter = identity;
+        }
+
+        /*
+         * ICarViewer implementation
+         */
+
+        public void ReloadData(List<Car> lc)
         {
             listView1.Items.Clear();
             listView1.SmallImageList = CarTypesImages;
@@ -46,12 +75,53 @@ namespace PAIN_Forms
             {
                 listView1.Items.Add(c.id.ToString(), c.ToString(), CarImageIndex(c));
             }
+            toolStripStatusLabel1.Text = lc.Count.ToString();
         }
 
         public void AddCar(Car c)
         {
-            listView1.Items.Add(c.ToString(), CarImageIndex(c));
+            listView1.Items.Add(c.id.ToString(), c.ToString(), CarImageIndex(c));
         }
+
+        public void EditCar(Car c)
+        {
+            foreach(ListViewItem i in listView1.Items)
+            {
+                if(i.Name == c.id.ToString())
+                {
+                    i.Text = c.ToString();
+                    i.ImageIndex = CarImageIndex(c);
+                }
+            }
+        }
+
+        public void DeleteCar(Car c)
+        {
+            foreach (ListViewItem i in listView1.Items)
+            {
+                if (i.Name == c.id.ToString())
+                {
+                    listView1.Items.Remove(i);
+                }
+            }
+        }
+
+        public void Filter()
+        {
+            List<Car> filtered = new List<Car>();
+            foreach(Car c in parent.cars)
+            {
+                if (currentFilter(c))
+                {
+                    filtered.Add(c);
+                }
+            }
+            ReloadData(filtered);
+        }
+
+        /*
+         * EVENTS
+         */
 
         private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
         {
@@ -118,16 +188,19 @@ namespace PAIN_Forms
         {
             if(comboBox1.SelectedIndex == 0)
             {
-                LoadData(parent.cars);
+                currentFilter = identity;
+                Filter();
 
             }
             else if(comboBox1.SelectedIndex == 1)
             {
-                LoadData(parent.before2000());
+                currentFilter = before2000;
+                Filter();
             }
             else if(comboBox1.SelectedIndex == 2)
             {
-                LoadData(parent.after2000());
+                currentFilter = after2000;
+                Filter();
             }
             else { }
         }
@@ -146,6 +219,11 @@ namespace PAIN_Forms
                 )
             );
             editDialog.ShowDialog();
+
+        }
+
+        private void toolStripStatusLabel2_Click(object sender, EventArgs e)
+        {
 
         }
     }

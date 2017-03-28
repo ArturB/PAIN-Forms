@@ -6,11 +6,15 @@ using System.Threading.Tasks;
 
 namespace PAIN_Forms
 {
-    interface ICarViewer
+    public delegate bool CarsFilter(Car c);
+
+    public interface ICarViewer
     {
         void AddCar(Car c);
         void EditCar(Car c);
         void DeleteCar(Car c);
-        void foo();
+        void ReloadData(List<Car> c);
+        CarsFilter currentFilter { get; set; }
+        void Filter();
     }
 }

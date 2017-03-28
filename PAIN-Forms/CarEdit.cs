@@ -14,7 +14,6 @@ namespace PAIN_Forms
     {
         CarTypeChooser chooser;
         ParentView parent;
-        Car editedCar;
 
         public CarEdit(ParentView parent_, Car editedCar_)
         {
@@ -25,11 +24,11 @@ namespace PAIN_Forms
             tableLayoutPanel1.SetColumnSpan(chooser, 2);
 
             parent = parent_;
-            editedCar = editedCar_;
-            markaTextBox.Text = editedCar.marka;
-            rokTextBox.Text = editedCar.rok_prod.ToString();
-            PredkoscTextBox.Text = editedCar.maks_v.ToString();
-            chooser.imageIndex = (int)editedCar.rodzaj;
+            idTextBox.Text = editedCar_.id.ToString();
+            markaTextBox.Text = editedCar_.marka;
+            rokTextBox.Text = editedCar_.rok_prod.ToString();
+            PredkoscTextBox.Text = editedCar_.maks_v.ToString();
+            chooser.imageIndex = (int)editedCar_.rodzaj;
         }
 
         private void CarEdit_FormClosing(object sender, FormClosingEventArgs e)
@@ -42,16 +41,29 @@ namespace PAIN_Forms
             
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Zapisz_Click(object sender, EventArgs e)
         {
             Car c = new PAIN_Forms.Car(
-                0,
-                markaTextBox.Text, 
-                int.Parse(rokTextBox.Text), 
+                int.Parse(idTextBox.Text),
+                markaTextBox.Text,
+                int.Parse(PredkoscTextBox.Text),
                 int.Parse(rokTextBox.Text), 
                 chooser.choosedType()
                 );
-            parent.AddCar(c);
+            parent.EditCar(c);
+            this.Close();
+        }
+
+        private void Usuń_Click(object sender, EventArgs e)
+        {
+            Car c = new PAIN_Forms.Car(
+                int.Parse(idTextBox.Text),
+                markaTextBox.Text,
+                int.Parse(PredkoscTextBox.Text),
+                int.Parse(rokTextBox.Text),
+                chooser.choosedType()
+                );
+            parent.DeleteCar(c);
             this.Close();
         }
     }

@@ -41,9 +41,9 @@ namespace PAIN_Forms
         {
             Car c = new PAIN_Forms.Car(
                 0,
-                markaTextBox.Text, 
-                int.Parse(rokTextBox.Text), 
-                int.Parse(rokTextBox.Text), 
+                markaTextBox.Text,
+                int.Parse(PredkoscTextBox.Text),
+                int.Parse(rokTextBox.Text),
                 chooser.choosedType()
                 );
             parent.AddCar(c);
