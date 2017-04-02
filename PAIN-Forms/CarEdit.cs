@@ -5,17 +5,17 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Text.RegularExpressions;
 
 namespace PAIN_Forms
 {
-    public partial class CarAdd : Form
+    public partial class CarEdit : Form
     {
         ParentView parent;
 
-        public CarAdd(ParentView parent_, int initImage_)
+        public CarEdit(ParentView parent_, Car editedCar_)
         {
             InitializeComponent();
 
@@ -23,7 +23,11 @@ namespace PAIN_Forms
             tableLayoutPanel1.SetColumnSpan(chooser, 2);
 
             parent = parent_;
-            chooser.imageIndex = initImage_;
+            idTextBox.Text = editedCar_.id.ToString();
+            markaTextBox.Text = editedCar_.marka;
+            rokTextBox.Text = editedCar_.rok_prod.ToString();
+            PredkoscTextBox.Text = editedCar_.maks_v.ToString();
+            chooser.imageIndex = (int)editedCar_.rodzaj;
         }
 
         private void CarEdit_FormClosing(object sender, FormClosingEventArgs e)
@@ -36,45 +40,58 @@ namespace PAIN_Forms
             
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            markaTextBox_Validated(null, null);
-            rokTextBox_Validated(null, null);
-            PredkoscTextBox_Validated(null, null);
-            if(
-                errorProvider1.GetError(markaTextBox)    == String.Empty &&
-                errorProvider1.GetError(rokTextBox)      == String.Empty &&
-                errorProvider1.GetError(PredkoscTextBox) == String.Empty
-              )
-            {
-                Car c = new PAIN_Forms.Car(
-                    0,
-                    markaTextBox.Text,
-                    int.Parse(PredkoscTextBox.Text),
-                    int.Parse(rokTextBox.Text),
-                    chooser.choosedType
-                );
-                parent.AddCar(c);
-                this.Close();
-            }
-            
-        }
-
         private void choosed_typeChanged(object sender, CarTypeChanged e)
         {
             typeTextBox.Text = e.newType;
         }
 
+        private void Zapisz_Click(object sender, EventArgs e)
+        {
+            markaTextBox_Validated(null, null);
+            rokTextBox_Validated(null, null);
+            PredkoscTextBox_Validated(null, null);
+            if (
+                errorProvider1.GetError(markaTextBox) == String.Empty &&
+                errorProvider1.GetError(rokTextBox) == String.Empty &&
+                errorProvider1.GetError(PredkoscTextBox) == String.Empty
+              )
+            {
+                Car c = new PAIN_Forms.Car(
+                    int.Parse(idTextBox.Text),
+                    markaTextBox.Text,
+                    int.Parse(PredkoscTextBox.Text),
+                    int.Parse(rokTextBox.Text),
+                    chooser.choosedType
+                );
+                parent.EditCar(c);
+                this.Close();
+            }
+                
+        }
+
+        private void Usuń_Click(object sender, EventArgs e)
+        {
+            Car c = new PAIN_Forms.Car(
+                int.Parse(idTextBox.Text),
+                markaTextBox.Text,
+                int.Parse(PredkoscTextBox.Text),
+                int.Parse(rokTextBox.Text),
+                chooser.choosedType
+                );
+            parent.DeleteCar(c);
+            this.Close();
+        }
+
         private void markaTextBox_Validated(object sender, EventArgs e)
         {
-            if(markaTextBox.Text == "")
+            if (markaTextBox.Text == "")
             {
                 errorProvider1.SetError(markaTextBox, "Pole wymagane!");
             }
-            else if(!new Regex("^[A-Z][A-Za-z 0-9]+$").IsMatch(markaTextBox.Text))
+            else if (!new Regex("^[A-Z][A-Za-z 0-9]+$").IsMatch(markaTextBox.Text))
             {
                 errorProvider1.SetError(
-                    markaTextBox, 
+                    markaTextBox,
                     "Nazwa marki musi zaczynać się z wielkiej litery i nie może zawierać znaków specjalnych!"
                 );
             }

@@ -47,6 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Car.cs" />
+    <Compile Include="CarEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CarEdit.Designer.cs">
+      <DependentUpon>CarEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="CarAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,6 +71,7 @@
     <Compile Include="CarView.Designer.cs">
       <DependentUpon>CarView.cs</DependentUpon>
     </Compile>
+    <Compile Include="ICarViewer.cs" />
     <Compile Include="ParentView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +80,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CarEdit.resx">
+      <DependentUpon>CarEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CarAdd.resx">
       <DependentUpon>CarAdd.cs</DependentUpon>
     </EmbeddedResource>

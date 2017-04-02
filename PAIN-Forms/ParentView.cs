@@ -13,6 +13,32 @@ namespace PAIN_Forms
     public partial class ParentView : Form
     {
         public List<Car> cars { get; set; }
+        int carsCount { get; set; }
+
+        public Car getCarByIndex(int index)
+        {
+            foreach(Car c in cars)
+            {
+                if (c.id == index)
+                {
+                    return c;
+                }
+            }
+            throw new NoSuchIndex();
+        }
+
+        public String ToolStripText
+        {
+            get
+            {
+                return toolStripStatusLabel1.Text;
+            }
+            set
+            {
+                toolStripStatusLabel1.Text = value;
+            }
+        }
+
 
         public ParentView()
         {
@@ -21,10 +47,17 @@ namespace PAIN_Forms
             cars.Add(new PAIN_Forms.Car(1, "Chevrolet", 180, 2005, CarType.Osobowy));
             cars.Add(new Car(2, "Scania", 140, 1999, CarType.Ciezarowy));
             cars.Add(new Car(3, "Romet", 50, 2010, CarType.Jednosladowy));
+            carsCount = 3;
+            CarView f = new CarView(this);
+            f.MdiParent = this;
+            f.ReloadData(cars);
+            f.Show();
         }
 
         public void AddCar(Car c)
         {
+            carsCount++;
+            c.id = carsCount;
             cars.Add(c);
             foreach(CarView cv in MdiChildren)
             {
@@ -32,6 +65,53 @@ namespace PAIN_Forms
             }
 
         }
+
+        public void EditCar(Car c)
+        {
+            foreach(Car uc in cars)
+            {
+                if(uc.id == c.id)
+                {
+                    uc.marka = c.marka;
+                    uc.rodzaj = c.rodzaj;
+                    uc.rok_prod = c.rok_prod;
+                    uc.maks_v = c.maks_v;
+                    break;
+                }
+            }
+            foreach (CarView cv in MdiChildren)
+            {
+                cv.EditCar(c);
+            }
+        }
+
+        public void DeleteCar(Car c)
+        {
+            foreach(Car uc in cars)
+            {
+                if(uc.id == c.id)
+                {
+                    cars.Remove(uc);
+                    break;
+                }
+            }
+            
+            foreach(CarView cv in MdiChildren)
+            {
+                cv.DeleteCar(c);
+            }
+        }
+
+        public void ReloadData(List<Car> c)
+        {
+            cars = c;
+            foreach(CarView cv in MdiChildren)
+            {
+                cv.ReloadData(c);
+            }
+        }
+
+        
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -42,7 +122,7 @@ namespace PAIN_Forms
         {
             CarView f = new CarView(this);
             f.MdiParent = this;
-            f.InitData();
+            f.ReloadData(cars);
             f.Show();
         }
 
@@ -50,5 +130,53 @@ namespace PAIN_Forms
         {
             Application.Exit();
         }
+
+        private void ParentView_MdiChildActivate(object sender, EventArgs e)
+        {
+            ToolStripText = ((CarView)ActiveMdiChild).ToolStripText;
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            CarView f = new CarView(this);
+            f.MdiParent = this;
+            f.ReloadData(cars);
+            f.Show();
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            CarView f = (CarView)ActiveMdiChild;
+            f.Close();
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            CarView f = (CarView)ActiveMdiChild;
+            f.ShowAddDialog(CarType.Osobowy);
+        }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            CarView f = (CarView)ActiveMdiChild;
+            f.ShowAddDialog(CarType.Ciezarowy);
+        }
+
+        private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+            CarView f = (CarView)ActiveMdiChild;
+            f.ShowAddDialog(CarType.Jednosladowy);
+        }
+
+        private void toolStripButton6_Click(object sender, EventArgs e)
+        {
+            CarView f = (CarView)ActiveMdiChild;
+            if(f.selectedCarIndex != null)
+            {
+                DeleteCar(new PAIN_Forms.Car((int)f.selectedCarIndex, String.Empty, 0, 0, CarType.Osobowy));
+            }
+            
+        }
     }
+    class NoSuchIndex : Exception { }
 }
