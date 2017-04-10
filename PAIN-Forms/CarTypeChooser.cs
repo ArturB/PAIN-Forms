@@ -12,6 +12,8 @@ namespace PAIN_Forms
 {
     public partial class CarTypeChooser : UserControl
     {
+        public event CarTypeChangedHandler typeChanged;
+
         int imageIndex_;
         public int imageIndex
         {
@@ -22,30 +24,37 @@ namespace PAIN_Forms
 
             set
             {
-                imageIndex_ = value;
-                pictureBox1.Image = imageList1.Images[imageIndex];
-                label1.Text = choosedType().ToString();
+                if(value != imageIndex)
+                {
+                    imageIndex_ = value;
+                    pictureBox1.Image = imageList1.Images[imageIndex];
+                    typeChanged?.Invoke(this, new CarTypeChanged(value));
+                }
+                
             }
         }
 
-        public CarType choosedType()
+        public CarType choosedType
         {
-            if (imageIndex == 0)
+            get
             {
-                return CarType.Osobowy;
-            }
-            else if (imageIndex == 1)
-            {
-                return CarType.Ciezarowy;
+                if (imageIndex == 0)
+                {
+                    return CarType.Osobowy;
+                }
+                else if (imageIndex == 1)
+                {
+                    return CarType.Ciezarowy;
 
+                }
+                else if (imageIndex == 2)
+                {
+                    return CarType.Jednosladowy;
+                }
+                else throw new UnknownCarType();
             }
-            else if (imageIndex == 2)
-            {
-                return CarType.Jednosladowy;
-            }
-            else throw new UnknownCarType();
         }
-
+        
         public CarTypeChooser()
         {
             InitializeComponent();
@@ -57,9 +66,42 @@ namespace PAIN_Forms
         {
             imageIndex = (imageIndex + 1) % 3;
             pictureBox1.Image = imageList1.Images[imageIndex];
-            label1.Text = choosedType().ToString();
         }
     }
+
+    public class CarTypeChanged : EventArgs
+    {
+        public int newIndex { get; set; }
+        public string newType { get; set; }
+
+        public CarTypeChanged(int newIndex_)
+        {
+            newIndex = newIndex_;
+            newType = choosedType(newIndex_).ToString();
+        }
+
+        private CarType choosedType(int index)
+        {
+            if (index == 0)
+            {
+                return CarType.Osobowy;
+            }
+            else if (index == 1)
+            {
+                return CarType.Ciezarowy;
+
+            }
+            else if (index == 2)
+            {
+                return CarType.Jednosladowy;
+            }
+            else throw new UnknownCarType();
+        }
+
+    }
+
+    public delegate void CarTypeChangedHandler(object sender, CarTypeChanged args);
+
 
     class UnknownCarType : Exception { }
 }

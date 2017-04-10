@@ -49,15 +49,21 @@
             this.osobowyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ciezarowyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.jednośladToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.EditContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.Edytuj = new System.Windows.Forms.ToolStripMenuItem();
+            this.Usuń = new System.Windows.Forms.ToolStripMenuItem();
+            this.nowyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.osobowyToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ciężarowyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.jednośladToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.EditContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -75,7 +81,9 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(601, 270);
             this.tableLayoutPanel1.TabIndex = 0;
+            this.tableLayoutPanel1.Click += new System.EventHandler(this.tableLayoutPanel1_Click);
             this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
+            this.tableLayoutPanel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel1_MouseClick);
             // 
             // listView1
             // 
@@ -96,6 +104,7 @@
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listView1_ItemSelectionChanged);
             this.listView1.DoubleClick += new System.EventHandler(this.listView1_DoubleClick);
+            this.listView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel1_MouseClick);
             // 
             // CarTypesImages
             // 
@@ -187,9 +196,7 @@
             // dataToolStripMenuItem
             // 
             this.dataToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addToolStripMenuItem,
-            this.editToolStripMenuItem,
-            this.deleteToolStripMenuItem});
+            this.addToolStripMenuItem});
             this.dataToolStripMenuItem.Name = "dataToolStripMenuItem";
             this.dataToolStripMenuItem.Size = new System.Drawing.Size(56, 24);
             this.dataToolStripMenuItem.Text = "Dane";
@@ -201,7 +208,7 @@
             this.ciezarowyToolStripMenuItem,
             this.jednośladToolStripMenuItem});
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(128, 26);
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(112, 26);
             this.addToolStripMenuItem.Text = "Add";
             // 
             // osobowyToolStripMenuItem
@@ -224,18 +231,6 @@
             this.jednośladToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
             this.jednośladToolStripMenuItem.Text = "Jednoślad";
             this.jednośladToolStripMenuItem.Click += new System.EventHandler(this.jednośladToolStripMenuItem_Click);
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(128, 26);
-            this.editToolStripMenuItem.Text = "Edit";
-            // 
-            // deleteToolStripMenuItem
-            // 
-            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(128, 26);
-            this.deleteToolStripMenuItem.Text = "Delete";
             // 
             // statusStrip1
             // 
@@ -265,6 +260,61 @@
             this.toolStripStatusLabel2.Text = "Cars showed";
             this.toolStripStatusLabel2.Click += new System.EventHandler(this.toolStripStatusLabel2_Click);
             // 
+            // EditContextMenu
+            // 
+            this.EditContextMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.EditContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Edytuj,
+            this.Usuń,
+            this.nowyToolStripMenuItem});
+            this.EditContextMenu.Name = "EditContextMenu";
+            this.EditContextMenu.Size = new System.Drawing.Size(182, 110);
+            // 
+            // Edytuj
+            // 
+            this.Edytuj.Name = "Edytuj";
+            this.Edytuj.Size = new System.Drawing.Size(181, 26);
+            this.Edytuj.Text = "Edytuj";
+            this.Edytuj.Click += new System.EventHandler(this.Edytuj_Click);
+            // 
+            // Usuń
+            // 
+            this.Usuń.Name = "Usuń";
+            this.Usuń.Size = new System.Drawing.Size(181, 26);
+            this.Usuń.Text = "Usuń";
+            this.Usuń.Click += new System.EventHandler(this.Usuń_Click);
+            // 
+            // nowyToolStripMenuItem
+            // 
+            this.nowyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.osobowyToolStripMenuItem1,
+            this.ciężarowyToolStripMenuItem,
+            this.jednośladToolStripMenuItem1});
+            this.nowyToolStripMenuItem.Name = "nowyToolStripMenuItem";
+            this.nowyToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.nowyToolStripMenuItem.Text = "Nowy";
+            // 
+            // osobowyToolStripMenuItem1
+            // 
+            this.osobowyToolStripMenuItem1.Name = "osobowyToolStripMenuItem1";
+            this.osobowyToolStripMenuItem1.Size = new System.Drawing.Size(181, 26);
+            this.osobowyToolStripMenuItem1.Text = "Osobowy";
+            this.osobowyToolStripMenuItem1.Click += new System.EventHandler(this.osobowyToolStripMenuItem1_Click);
+            // 
+            // ciężarowyToolStripMenuItem
+            // 
+            this.ciężarowyToolStripMenuItem.Name = "ciężarowyToolStripMenuItem";
+            this.ciężarowyToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.ciężarowyToolStripMenuItem.Text = "Ciężarowy";
+            this.ciężarowyToolStripMenuItem.Click += new System.EventHandler(this.ciężarowyToolStripMenuItem_Click);
+            // 
+            // jednośladToolStripMenuItem1
+            // 
+            this.jednośladToolStripMenuItem1.Name = "jednośladToolStripMenuItem1";
+            this.jednośladToolStripMenuItem1.Size = new System.Drawing.Size(181, 26);
+            this.jednośladToolStripMenuItem1.Text = "Jednoślad";
+            this.jednośladToolStripMenuItem1.Click += new System.EventHandler(this.jednośladToolStripMenuItem1_Click);
+            // 
             // CarView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -287,6 +337,7 @@
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.EditContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -310,13 +361,18 @@
         private System.Windows.Forms.ToolStripMenuItem osobowyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ciezarowyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem jednośladToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ContextMenuStrip EditContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem Edytuj;
+        private System.Windows.Forms.ToolStripMenuItem Usuń;
+        private System.Windows.Forms.ToolStripMenuItem nowyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem osobowyToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem ciężarowyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem jednośladToolStripMenuItem1;
     }
 }

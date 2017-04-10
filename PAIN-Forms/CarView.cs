@@ -255,5 +255,64 @@ namespace PAIN_Forms
         {
             parent.ToolStripText = ToolStripText;
         }
+
+        private void Nowy_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Right)
+            {
+                EditContextMenu.Show(Cursor.Position);
+            }
+        }
+
+        private void Edytuj_Click(object sender, EventArgs e)
+        {
+            CarEdit editDialog = new CarEdit(
+                parent,
+                parent.getCarByIndex(
+                    int.Parse(listView1.SelectedItems[0].Name)
+                )
+            );
+            editDialog.ShowDialog();
+        }
+
+        private void Usuń_Click(object sender, EventArgs e)
+        {
+            Car c = new PAIN_Forms.Car(
+                int.Parse(listView1.SelectedItems[0].Name),
+                String.Empty,
+                0,
+                0,
+                CarType.Osobowy
+                );
+            parent.DeleteCar(c);
+        }
+
+        private void tableLayoutPanel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void osobowyToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            CarAdd editDialog = new CarAdd(parent, 0);
+            editDialog.ShowDialog();
+        }
+
+        private void ciężarowyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CarAdd editDialog = new CarAdd(parent, 1);
+            editDialog.ShowDialog();
+        }
+
+        private void jednośladToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            CarAdd editDialog = new CarAdd(parent, 2);
+            editDialog.ShowDialog();
+        }
     }
 }

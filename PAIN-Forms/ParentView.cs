@@ -131,6 +131,11 @@ namespace PAIN_Forms
         {
             ToolStripText = ((CarView)ActiveMdiChild).ToolStripText;
         }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
     class NoSuchIndex : Exception { }
 }
