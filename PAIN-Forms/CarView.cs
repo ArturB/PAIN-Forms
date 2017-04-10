@@ -172,7 +172,7 @@ namespace PAIN_Forms
             else
             {
                 int count = int.Parse(toolStripStatusLabel1.Text);
-                toolStripStatusLabel1.Text = count--.ToString();
+                toolStripStatusLabel1.Text = (--count).ToString();
             }
         }
 
