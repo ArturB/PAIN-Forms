@@ -13,15 +13,12 @@ namespace PAIN_Forms
 {
     public partial class CarEdit : Form
     {
-        CarTypeChooser chooser;
         ParentView parent;
 
         public CarEdit(ParentView parent_, Car editedCar_)
         {
             InitializeComponent();
 
-            chooser = new CarTypeChooser();
-            chooser.typeChanged += new CarTypeChangedHandler(choosed_typeChanged);
             tableLayoutPanel1.Controls.Add(chooser, 1, 4);
             tableLayoutPanel1.SetColumnSpan(chooser, 2);
 

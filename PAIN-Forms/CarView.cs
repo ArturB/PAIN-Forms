@@ -69,6 +69,17 @@ namespace PAIN_Forms
             }
         }
 
+        public int? selectedCarIndex
+        {
+            get
+            {
+                if (listView1.SelectedItems.Count == 0)
+                    return null;
+                else
+                    return int.Parse(listView1.SelectedItems[0].Name);
+            }
+        }
+
 
         /*
          * ICarViewer implementation
@@ -91,6 +102,28 @@ namespace PAIN_Forms
                 
             }
             toolStripStatusLabel1.Text = count.ToString();
+        }
+
+        public void ShowAddDialog(CarType init)
+        {
+            CarAdd addDialog = new CarAdd(parent, (int)init);
+            addDialog.ShowDialog();
+        }
+
+        public void ShowEditDialog()
+        {
+            CarEdit editDialog = new CarEdit(
+                parent,
+                parent.getCarByIndex(
+                    int.Parse(listView1.SelectedItems[0].Name)
+                )
+            );
+            editDialog.ShowDialog();
+        }
+
+        public void ShowDeleteDialog()
+        {
+            ShowEditDialog();
         }
 
         public void AddCar(Car c)

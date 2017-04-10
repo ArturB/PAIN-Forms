@@ -71,7 +71,6 @@
     <Compile Include="CarView.Designer.cs">
       <DependentUpon>CarView.cs</DependentUpon>
     </Compile>
-    <Compile Include="ICarEditor.cs" />
     <Compile Include="ICarViewer.cs" />
     <Compile Include="ParentView.cs">
       <SubType>Form</SubType>

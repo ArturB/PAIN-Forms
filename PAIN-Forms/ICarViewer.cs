@@ -19,9 +19,13 @@ namespace PAIN_Forms
     public interface ICarViewer
     {
         void AddCar(Car c);
+        void ShowAddDialog(CarType init);
         void EditCar(Car c);
+        void ShowEditDialog();
         void DeleteCar(Car c);
+        void ShowDeleteDialog();
         void ReloadData(List<Car> c);
         CarsFilter currentFilter { get; set; }
+        int? selectedCarIndex { get; }
     }
 }

@@ -48,6 +48,10 @@ namespace PAIN_Forms
             cars.Add(new Car(2, "Scania", 140, 1999, CarType.Ciezarowy));
             cars.Add(new Car(3, "Romet", 50, 2010, CarType.Jednosladowy));
             carsCount = 3;
+            CarView f = new CarView(this);
+            f.MdiParent = this;
+            f.ReloadData(cars);
+            f.Show();
         }
 
         public void AddCar(Car c)
@@ -134,7 +138,44 @@ namespace PAIN_Forms
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
+            CarView f = new CarView(this);
+            f.MdiParent = this;
+            f.ReloadData(cars);
+            f.Show();
+        }
 
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            CarView f = (CarView)ActiveMdiChild;
+            f.Close();
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            CarView f = (CarView)ActiveMdiChild;
+            f.ShowAddDialog(CarType.Osobowy);
+        }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            CarView f = (CarView)ActiveMdiChild;
+            f.ShowAddDialog(CarType.Ciezarowy);
+        }
+
+        private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+            CarView f = (CarView)ActiveMdiChild;
+            f.ShowAddDialog(CarType.Jednosladowy);
+        }
+
+        private void toolStripButton6_Click(object sender, EventArgs e)
+        {
+            CarView f = (CarView)ActiveMdiChild;
+            if(f.selectedCarIndex != null)
+            {
+                DeleteCar(new PAIN_Forms.Car((int)f.selectedCarIndex, String.Empty, 0, 0, CarType.Osobowy));
+            }
+            
         }
     }
     class NoSuchIndex : Exception { }

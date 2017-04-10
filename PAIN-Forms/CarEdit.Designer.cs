@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CarEdit));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.typeTextBox = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -40,10 +41,12 @@
             this.Zapisz = new System.Windows.Forms.Button();
             this.Usuń = new System.Windows.Forms.Button();
             this.idTextBox = new System.Windows.Forms.TextBox();
+            this.chooser = new PAIN_Forms.CarTypeChooser();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.typeTextBox = new System.Windows.Forms.Label();
+            this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -63,6 +66,7 @@
             this.tableLayoutPanel1.Controls.Add(this.Zapisz, 1, 6);
             this.tableLayoutPanel1.Controls.Add(this.Usuń, 2, 6);
             this.tableLayoutPanel1.Controls.Add(this.idTextBox, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.chooser, 1, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 20);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -76,6 +80,19 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.96649F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(477, 379);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // typeTextBox
+            // 
+            this.typeTextBox.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.typeTextBox, 2);
+            this.typeTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.typeTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.typeTextBox.Location = new System.Drawing.Point(122, 300);
+            this.typeTextBox.Name = "typeTextBox";
+            this.typeTextBox.Size = new System.Drawing.Size(232, 31);
+            this.typeTextBox.TabIndex = 12;
+            this.typeTextBox.Text = "Osobowy";
+            this.typeTextBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label1
             // 
@@ -172,24 +189,26 @@
             this.idTextBox.TabIndex = 9;
             this.idTextBox.Visible = false;
             // 
+            // chooser
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.chooser, 2);
+            this.chooser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chooser.imageIndex = 0;
+            this.chooser.Location = new System.Drawing.Point(122, 183);
+            this.chooser.Name = "chooser";
+            this.chooser.Size = new System.Drawing.Size(232, 114);
+            this.chooser.TabIndex = 13;
+            this.chooser.typeChanged += new PAIN_Forms.CarTypeChangedHandler(this.choosed_typeChanged);
+            // 
             // errorProvider1
             // 
             this.errorProvider1.BlinkRate = 0;
             this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider1.ContainerControl = this;
             // 
-            // typeTextBox
+            // errorProvider2
             // 
-            this.typeTextBox.AutoSize = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.typeTextBox, 2);
-            this.typeTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.typeTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.typeTextBox.Location = new System.Drawing.Point(122, 300);
-            this.typeTextBox.Name = "typeTextBox";
-            this.typeTextBox.Size = new System.Drawing.Size(232, 31);
-            this.typeTextBox.TabIndex = 12;
-            this.typeTextBox.Text = "Osobowy";
-            this.typeTextBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.errorProvider2.ContainerControl = this;
             // 
             // CarEdit
             // 
@@ -206,6 +225,7 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -224,5 +244,7 @@
         private System.Windows.Forms.TextBox idTextBox;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Label typeTextBox;
+        private CarTypeChooser chooser;
+        private System.Windows.Forms.ErrorProvider errorProvider2;
     }
 }
